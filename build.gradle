@@ -18,7 +18,6 @@ plugins {
     id 'org.gradlex.java-ecosystem-capabilities'
     id 'checkstyle'
     id 'pmd'
-    id 'findbugs'
 }
 
 /*
@@ -92,7 +91,7 @@ subprojects {
 
         // compile flags
         tasks.withType(JavaCompile) {
-            options.release = 17
+            options.release = 11
             options.encoding = 'UTF-8'
             options.incremental = true
             options.failOnError = true
@@ -228,13 +227,6 @@ subprojects {
         toolVersion = '6.35.0'
         ignoreFailures = false
         ruleSets = []
-        sourceSets = [sourceSets.main]
-    }
-
-    findbugs {
-        toolVersion = '3.0.2'
-        ignoreFailures = false
-        reportLevel = 'low'
         sourceSets = [sourceSets.main]
     }
 
