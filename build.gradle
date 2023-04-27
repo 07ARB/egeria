@@ -18,6 +18,7 @@ plugins {
     id 'org.gradlex.java-ecosystem-capabilities'
     id 'checkstyle'
     id 'pmd'
+    id 'jacoco'
 }
 
 /*
@@ -225,8 +226,6 @@ subprojects {
     pmd {
         toolVersion = '6.35.0'
         ignoreFailures = false
-        ruleSets = []
-        sourceSets = [sourceSets.main]
     }
 
 }
