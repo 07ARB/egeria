@@ -12,6 +12,22 @@ plugins {
     id 'pmd'
 }
 
+allprojects {
+    group = 'org.odpi.egeria'
+    version = '4.1-SNAPSHOT'
+
+    // Signing/publish used in parent & child projects
+    apply plugin: 'maven-publish'
+    apply plugin: 'signing'
+
+    // Only use maven central
+    repositories {
+        mavenCentral()
+        // used by tink (encrypted filestore connector)
+        google()
+    }
+}
+
 
 /*
  * Configuration for sub projects only
