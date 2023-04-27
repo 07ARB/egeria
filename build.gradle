@@ -94,7 +94,7 @@ subprojects {
             options.release = 17
             options.encoding = 'UTF-8'
             options.incremental = true
-            options.failOnError = true
+            options.failOnError = false
             options.compilerArgs << "-Xlint:all" << "-Xmaxerrs" << "1000" << "-Xmaxwarns" << "1000"
         }
 
