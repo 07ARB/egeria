@@ -7,45 +7,17 @@
  * Plugins for this parent module only - so just high level project related
  * Plugin management - ie version specs - are in settings.gradle
  */
+
 plugins {
-    id 'checkstyle'
     id 'pmd'
+    id 'checkstyle'
 }
 
 allprojects {
-    group = 'org.odpi.egeria'
-    version = '4.1-SNAPSHOT'
-
-    // Signing/publish used in parent & child projects
-    apply plugin: 'maven-publish'
-    apply plugin: 'signing'
-
-    // Only use maven central
-    repositories {
-        mavenCentral()
-        // used by tink (encrypted filestore connector)
-        google()
-    }
-}
-
-
-/*
- * Configuration for sub projects only
- */
-subprojects {
-    // TODO: Consider using convention plugins to stylise different profiles of subprojects
-
+    apply plugin: 'java'
     apply plugin: 'pmd'
     apply plugin: 'checkstyle'
-    apply plugin: 'jacoco'
 
-    // compile flags
-    tasks.withType(JavaCompile) {
-        // run the PMD, Checkstyle, and FindBugs tasks after compilation
-        dependsOn pmdMain, checkstyleMain
-    }
-
-        
     // Checking of javaheaders for license & copyright
     checkstyle {
         toolVersion = '10.7.0'
@@ -58,4 +30,7 @@ subprojects {
         ignoreFailures = false
     }
 
+    tasks.withType(JavaCompile) {
+        dependsOn pmdMain, checkstyleMain
+    }
 }
