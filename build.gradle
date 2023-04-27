@@ -18,6 +18,7 @@ plugins {
     id 'org.gradlex.java-ecosystem-capabilities'
     id 'checkstyle'
     id 'pmd'
+    id "org.sonarqube" version "3.0"
 }
 
 /*
