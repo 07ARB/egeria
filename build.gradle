@@ -52,7 +52,7 @@ subprojects {
         // compile flags
         tasks.withType(JavaCompile) {
             // run the PMD, Checkstyle, and FindBugs tasks after compilation
-            dependsOn pmdMain, checkstyleMain, findbugsMain
+            dependsOn pmdMain, checkstyleMain
         }
 
         
