@@ -14,23 +14,26 @@ plugins {
 }
 
 allprojects {
-    apply plugin: 'java'
-    apply plugin: 'pmd'
-    apply plugin: 'checkstyle'
 
-    // Checking of javaheaders for license & copyright
-    checkstyle {
-        toolVersion = '10.7.0'
-        showViolations = true
-        ignoreFailures = false
-    }
-    
-    pmd {
-        toolVersion = '6.35.0'
-        ignoreFailures = false
-    }
+    // The 'bom' project is a special case - we must not apply anything else to it
+    if (project.name != 'bom' && project.buildFile.exists()) {
+        apply plugin: 'pmd'
+        apply plugin: 'checkstyle'
 
-    tasks.withType(JavaCompile) {
-        dependsOn pmdMain, checkstyleMain
+        // Checking of javaheaders for license & copyright
+        checkstyle {
+            toolVersion = '10.7.0'
+            showViolations = true
+            ignoreFailures = false
+        }
+
+        pmd {
+            toolVersion = '6.35.0'
+            ignoreFailures = false
+        }
+
+        tasks.withType(JavaCompile) {
+            dependsOn pmdMain, checkstyleMain
+        }
     }
 }
