@@ -82,11 +82,7 @@ subprojects {
             }
         }
 
-        // Maven publishing (to public repo) requires we included source and javadoc jars
-        java {
-            withSourcesJar()
-            withJavadocJar()
-        }
+        
 
         // compile flags
         tasks.withType(JavaCompile) {
