@@ -91,7 +91,7 @@ subprojects {
 
         // compile flags
         tasks.withType(JavaCompile) {
-            options.release = 11
+            options.release = 17
             options.encoding = 'UTF-8'
             options.incremental = true
             options.failOnError = true
