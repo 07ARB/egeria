@@ -10,32 +10,8 @@
 plugins {
     id 'checkstyle'
     id 'pmd'
-    id 'jacoco'
 }
 
-/*
- * See pom/build.gradle for the Egeria BOM - including specification of dependency constraints and versions
- * This has MOVED from this top level project
- */
-
-/*
- * Configuration for all projects - INCLUDING this one
- */
-allprojects {
-    group = 'org.odpi.egeria'
-    version = '4.1-SNAPSHOT'
-
-    // Signing/publish used in parent & child projects
-    apply plugin: 'maven-publish'
-    apply plugin: 'signing'
-
-    // Only use maven central
-    repositories {
-        mavenCentral()
-        // used by tink (encrypted filestore connector)
-        google()
-    }
-} // end of allProjects
 
 /*
  * Configuration for sub projects only
@@ -43,20 +19,17 @@ allprojects {
 subprojects {
     // TODO: Consider using convention plugins to stylise different profiles of subprojects
 
-    // The 'bom' project is a special case - we must not apply anything else to it
-    if (project.name != 'bom' && project.buildFile.exists()) {
-        apply plugin: 'pmd'
-        apply plugin: 'checkstyle'
-        apply plugin: 'jacoco'
+    apply plugin: 'pmd'
+    apply plugin: 'checkstyle'
+    apply plugin: 'jacoco'
 
-        // compile flags
-        tasks.withType(JavaCompile) {
-            // run the PMD, Checkstyle, and FindBugs tasks after compilation
-            dependsOn pmdMain, checkstyleMain
-        }
+    // compile flags
+    tasks.withType(JavaCompile) {
+        // run the PMD, Checkstyle, and FindBugs tasks after compilation
+        dependsOn pmdMain, checkstyleMain
+    }
 
         
-
     // Checking of javaheaders for license & copyright
     checkstyle {
         toolVersion = '10.7.0'
@@ -68,7 +41,5 @@ subprojects {
         toolVersion = '6.35.0'
         ignoreFailures = false
     }
-    
-   }
 
 }
