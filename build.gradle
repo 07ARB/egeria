@@ -17,6 +17,8 @@ plugins {
     // This plugin helps resolve jakarta/javax dev.jacomet.logging-capabilities
     id 'org.gradlex.java-ecosystem-capabilities'
     id 'checkstyle'
+    id 'pmd'
+    id 'findbugs'
 }
 
 /*
@@ -54,6 +56,8 @@ subprojects {
         apply plugin: 'java'
         apply plugin: 'jacoco'
         apply plugin: 'checkstyle'
+        apply plugin: 'findbugs'
+        apply plugin: 'pmd'
         //apply plugin: 'io.freefair.lombok'
         apply plugin: 'com.autonomousapps.dependency-analysis'
         apply plugin: 'dev.jacomet.logging-capabilities'
@@ -217,7 +221,23 @@ subprojects {
     checkstyle {
         toolVersion = '10.7.0'
         showViolations = true
+        ignoreFailures = false
     }
+    
+    pmd {
+        toolVersion = '6.35.0'
+        ignoreFailures = false
+        ruleSets = []
+        sourceSets = [sourceSets.main]
+    }
+
+    findbugs {
+        toolVersion = '3.0.2'
+        ignoreFailures = false
+        reportLevel = 'low'
+        sourceSets = [sourceSets.main]
+    }
+
 }
 
 
