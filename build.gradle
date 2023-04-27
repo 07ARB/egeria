@@ -8,15 +8,15 @@
  * Plugin management - ie version specs - are in settings.gradle
  */
 
+// The 'bom' project is a special case - we must not apply anything else to it
+if (project.name != 'bom' && project.buildFile.exists()) {
+
 plugins {
     id 'pmd'
     id 'checkstyle'
 }
 
 allprojects {
-
-    // The 'bom' project is a special case - we must not apply anything else to it
-    if (project.name != 'bom' && project.buildFile.exists()) {
         apply plugin: 'pmd'
         apply plugin: 'checkstyle'
 
@@ -35,5 +35,5 @@ allprojects {
         tasks.withType(JavaCompile) {
             dependsOn pmdMain, checkstyleMain
         }
-    }
+ }
 }
