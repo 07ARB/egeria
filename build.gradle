@@ -55,7 +55,6 @@ subprojects {
         apply plugin: 'java'
         apply plugin: 'jacoco'
         apply plugin: 'checkstyle'
-        apply plugin: 'findbugs'
         apply plugin: 'pmd'
         //apply plugin: 'io.freefair.lombok'
         apply plugin: 'com.autonomousapps.dependency-analysis'
